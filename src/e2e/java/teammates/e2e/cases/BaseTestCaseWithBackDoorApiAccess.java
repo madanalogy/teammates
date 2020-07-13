@@ -159,21 +159,21 @@ public abstract class BaseTestCaseWithBackDoorApiAccess extends BaseTestCaseWith
         });
     }
 
-    protected InstructorAttributes getInstructor(String courseId, String instructorEmail) {
-        return BackDoor.getInstructor(courseId, instructorEmail);
+    protected InstructorAttributes getInstructor(String courseId, String instructorId, String instructorEmail) {
+        return BackDoor.getInstructor(courseId, instructorId, instructorEmail);
     }
 
     @Override
     protected InstructorAttributes getInstructor(InstructorAttributes instructor) {
-        return getInstructor(instructor.courseId, instructor.email);
+        return getInstructor(instructor.courseId, instructor.googleId, instructor.email);
     }
 
-    protected InstructorAttributes getInstructorWithRetry(String courseId, String instructorEmail)
+    protected InstructorAttributes getInstructorWithRetry(String courseId, String instructorId, String instructorEmail)
             throws MaximumRetriesExceededException {
         return getPersistenceRetryManager().runUntilNotNull(new RetryableTaskReturns<InstructorAttributes>("getInstructor") {
             @Override
             public InstructorAttributes run() {
-                return getInstructor(courseId, instructorEmail);
+                return getInstructor(courseId, instructorId, instructorEmail);
             }
         });
     }

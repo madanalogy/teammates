@@ -333,9 +333,10 @@ public final class BackDoor {
     /**
      * Gets instructor data from the datastore.
      */
-    public static InstructorData getInstructorData(String courseId, String email) {
+    public static InstructorData getInstructorData(String courseId, String instructorId, String email) {
         Map<String, String[]> params = new HashMap<>();
         params.put(Const.ParamsNames.COURSE_ID, new String[] { courseId });
+        params.put(Const.ParamsNames.USER_ID, new String[] { instructorId });
         params.put(Const.ParamsNames.INTENT, new String[] { Intent.FULL_DETAIL.toString() });
         ResponseBodyAndCode response = executeGetRequest(Const.ResourceURIs.INSTRUCTORS, params);
         if (response.responseCode == HttpStatus.SC_NOT_FOUND) {
@@ -355,8 +356,8 @@ public final class BackDoor {
     /**
      * Get instructor from datastore. Does not include certain fields like InstructorPrivileges.
      */
-    public static InstructorAttributes getInstructor(String courseId, String instructorEmail) {
-        InstructorData instructorData = getInstructorData(courseId, instructorEmail);
+    public static InstructorAttributes getInstructor(String courseId, String instructorId, String instructorEmail) {
+        InstructorData instructorData = getInstructorData(courseId, instructorId, instructorEmail);
         if (instructorData == null) {
             return null;
         }
