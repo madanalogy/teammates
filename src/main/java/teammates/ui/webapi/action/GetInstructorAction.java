@@ -51,24 +51,32 @@ public class GetInstructorAction extends BasicFeedbackSubmissionAction {
         Intent intent = Intent.valueOf(getNonNullRequestParamValue(Const.ParamsNames.INTENT));
 
         InstructorAttributes instructorAttributes;
+        InstructorData instructorData;
         String courseId = getNonNullRequestParamValue(Const.ParamsNames.COURSE_ID);
 
         switch (intent) {
         case INSTRUCTOR_SUBMISSION:
             instructorAttributes = getInstructorOfCourseFromRequest(courseId);
+            if (instructorAttributes == null) {
+                return new JsonResult("Instructor could not be found for this course",
+                        HttpStatus.SC_NOT_FOUND);
+            }
+            instructorData = new InstructorData(instructorAttributes);
             break;
         case FULL_DETAIL:
             instructorAttributes = logic.getInstructorForGoogleId(courseId, userInfo.getId());
+            if (instructorAttributes == null) {
+                return new JsonResult("Instructor could not be found for this course",
+                        HttpStatus.SC_NOT_FOUND);
+            }
+            instructorData = new InstructorData(instructorAttributes);
+            instructorData.setGoogleId(instructorAttributes.googleId);
             break;
         default:
             throw new InvalidHttpParameterException("Unknown intent " + intent);
         }
 
-        if (instructorAttributes == null) {
-            return new JsonResult("Instructor could not be found for this course", HttpStatus.SC_NOT_FOUND);
-        }
-
-        return new JsonResult(new InstructorData(instructorAttributes));
+        return new JsonResult(instructorData);
     }
 
 }
