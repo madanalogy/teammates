@@ -52,9 +52,7 @@ public class SearchInstructorsActionTest extends BaseActionTest<SearchInstructor
         JsonResult result = getJsonResult(action);
         InstructorsData response = (InstructorsData) result.getOutput();
         assertTrue(response.getInstructors().stream()
-                .filter(i -> i.getName().equals(acc.getName()))
-                .findAny()
-                .isPresent());
+                .anyMatch(i -> i.getName().equals(acc.getName())));
     }
 
     @Test
@@ -65,9 +63,7 @@ public class SearchInstructorsActionTest extends BaseActionTest<SearchInstructor
         JsonResult result = getJsonResult(action);
         InstructorsData response = (InstructorsData) result.getOutput();
         assertTrue(response.getInstructors().stream()
-                .filter(i -> i.getName().equals(acc.getName()))
-                .findAny()
-                .isPresent());
+                .anyMatch(i -> i.getName().equals(acc.getName())));
     }
 
     @Test
@@ -78,9 +74,7 @@ public class SearchInstructorsActionTest extends BaseActionTest<SearchInstructor
         JsonResult result = getJsonResult(action);
         InstructorsData response = (InstructorsData) result.getOutput();
         assertTrue(response.getInstructors().stream()
-                .filter(i -> i.getName().equals(acc.getName()))
-                .findAny()
-                .isPresent());
+                .anyMatch(i -> i.getName().equals(acc.getName())));
         assertTrue(response.getInstructors().get(0).getKey() != null);
         assertTrue(response.getInstructors().get(0).getInstitute() != null);
     }
@@ -93,9 +87,7 @@ public class SearchInstructorsActionTest extends BaseActionTest<SearchInstructor
         JsonResult result = getJsonResult(action);
         InstructorsData response = (InstructorsData) result.getOutput();
         assertTrue(response.getInstructors().stream()
-                .filter(i -> i.getName().equals(acc.getName()))
-                .findAny()
-                .isPresent());
+                .anyMatch(i -> i.getName().equals(acc.getName())));
         assertTrue(response.getInstructors().get(0).getKey() != null);
         assertTrue(response.getInstructors().get(0).getInstitute() != null);
     }
@@ -108,9 +100,7 @@ public class SearchInstructorsActionTest extends BaseActionTest<SearchInstructor
         JsonResult result = getJsonResult(action);
         InstructorsData response = (InstructorsData) result.getOutput();
         assertTrue(response.getInstructors().stream()
-                .filter(i -> i.getName().equals(acc.getName()))
-                .findAny()
-                .isPresent());
+                .anyMatch(i -> i.getName().equals(acc.getName())));
         assertTrue(response.getInstructors().get(0).getKey() != null);
         assertTrue(response.getInstructors().get(0).getInstitute() != null);
     }

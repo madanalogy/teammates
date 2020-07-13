@@ -285,7 +285,7 @@ export class InstructorCourseEditPageComponent implements OnInit {
      * typed as such to accomodate for a use case in SearchService.
      */
     return {
-      googleId: i.googleId,
+      googleId: i.googleId ? i.googleId : '',
       courseId: i.courseId,
       email: i.email,
       // tslint:disable-next-line
